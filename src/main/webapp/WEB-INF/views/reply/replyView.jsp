@@ -99,7 +99,8 @@
 						<tr id="replRow_${rl.r_num}" style="border-top:1px solid #cdcdcd;">
 							<c:if test="${rl.r_level>0 }"><td colspan="${rl.r_level}"></td></c:if>
 							<td style="width:60px;padding-top:20px;">
-								<span class="glyphicon glyphicon-user" style="float:left;color:#dfe1e5;font-size:40px"></span>
+								<!-- <span class="glyphicon glyphicon-user" style="float:left;color:#dfe1e5;font-size:40px"></span> -->
+								<img width="45" height="45" alt="프로필 사진" style="float:left;border-radius:50%;box-shadow:0px 0px 0.5px 1px #dfe1e5;" src="${path }/resources/upload/${rl.r_profile}">
 							</td>
 							<td colspan="11-${rl.r_level}">
 								<p style="padding-top:10px;font-size:13px;font-weight:bolder;cursor:pointer;margin-bottom:1px;line-height:1px;">${rl.r_nick }

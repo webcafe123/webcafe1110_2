@@ -38,7 +38,10 @@
 	 f.f_num = a.fnum) f2 on b.b_num = f2.f_b_num) -->
 
 	where
-	b_c_num=#{b_c_num} and b_del != 'y'
+	<if test="totalSearch==false">
+		b_c_num=#{b_c_num} and 
+	</if>
+		b_del != 'y'
 	<if test="keyword!=null and keyword!=''">
 		and
 		<if test="search =='subcon'">
@@ -172,6 +175,17 @@
       where b_num=#{b_num}
    </update>
 
+<insert id="insertBoardLike" parameterType="board">
+	insert into board_like values (#{b_num}, #{b_id})
+</insert>
+
+<delete id="deleteBoardLike" parameterType="board">
+	delete from board_like where b_like_num=#{b_num} and b_like_id=#{b_id}
+</delete>
+
+<select id="getBoardLike" parameterType="board" resultType="String">
+	select b_like_id from board_like where b_like_num=#{b_num} and b_like_id=#{b_id}
+</select>
 
 </mapper>
 

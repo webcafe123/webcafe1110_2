@@ -13,6 +13,7 @@
 		<result property="user_regdate" column="user_regdate" />
 		<result property="user_update" column="user_update" />
 		<result property="user_pwd" column="user_pwd" />
+		<result property="user_profile" column="user_profile" />
 	</resultMap>
 
 	<!-- myBatis에서 객체명은 소문자로 한다. -->
@@ -31,7 +32,7 @@
 	<insert id="insert" parameterType="user">
 		insert into user_info
 		values(#{user_id},#{user_nickname},#{user_name},#{user_age},
-		#{user_email},#{user_ip},1,'n',sysdate,sysdate,#{user_pwd})
+		#{user_email},#{user_ip},1,'n',sysdate,sysdate,#{user_pwd},#{user_profile})
 	</insert>
 	
 	<!-- 유정 추가부분 -->
@@ -40,8 +41,8 @@
 		from user_info where user_nickname = #{user_nickname}
 	</select>
 	
-	<update id="updateN" parameterType="string">
-		update user_info set user_nickname = #{user_nickname} where user_id = #{user_id}
+	<update id="updateN" parameterType="user">
+		update user_info set user_nickname = #{user_nickname}, user_profile = #{user_profile} where user_id = #{user_id}
 	</update>
 	
 	<select id="selectB" parameterType="string" resultType="integer">

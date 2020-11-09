@@ -40,8 +40,8 @@ public class BoardController {
    
    
    @RequestMapping("board/list")
-   public String list(Board board, String pageNum, Model model) {
-      
+   public String list(Board board, String pageNum, Model model) { 
+	  if(board.getB_c_num()==0) board.setTotalSearch(true);
       int rowPerPage = 10;
       if(pageNum == null || pageNum.equals("")) //페이지가 지정되지 않으면 1페이지를 보여줘라
          pageNum="1";
@@ -57,16 +57,16 @@ public class BoardController {
       
       PagingBean pb = new PagingBean(currentPage, rowPerPage, total);
       
-      String[] tit = {"작성자", "제목", "내용", "제목+내용"};
+      String[] tit = {"제목", "작성자", "내용", "제목+내용"};
       model.addAttribute("tit",tit);
       model.addAttribute("list",list);
       model.addAttribute("board",board);
       model.addAttribute("pb", pb);
       model.addAttribute("no", no);
-      
+      if(board.getB_c_num()!=0) {
       Cate cate = cs.select(board.getB_c_num());
       model.addAttribute("cate",cate);
-      
+      }
       return "/board/list";
    }
    @RequestMapping("board/searchList")
@@ -90,7 +90,7 @@ public class BoardController {
       
       PagingBean pb = new PagingBean(currentPage, rowPerPage, total);
       
-      String[] tit = {"작성자", "제목", "내용", "제목+내용"};
+      String[] tit = {"제목", "작성자", "내용", "제목+내용"};
       model.addAttribute("bd", bd);
       model.addAttribute("tit",tit);
       model.addAttribute("list",list);
@@ -125,7 +125,7 @@ public class BoardController {
       //System.out.println("갯수 : "+photolist.size());
       PagingBean pb = new PagingBean(currentPage, rowPerPage, total);
       
-      String[] tit = {"작성자", "제목", "내용", "제목+내용"};
+      String[] tit = {"제목", "작성자", "내용", "제목+내용"};
       model.addAttribute("bd", bd);
       model.addAttribute("tit",tit);
       model.addAttribute("list",list);
@@ -203,10 +203,22 @@ public class BoardController {
 		bs.updateReadCount(b_num);
 				
 		Board board = bs.select(b_num);
+		User user = us.select(board.getB_id());
+		
+        Board boardLike = new Board();
+        String id = (String)session.getAttribute("user_id");
+        boardLike.setB_id(id);
+        boardLike.setB_num(b_num);
+        String existHeart = bs.getBoardLike(boardLike);
+        int didHeart = 0;
+		if(existHeart!=null&&!existHeart.equals("")) {didHeart=1;}
+		
 		List<FileUpload> list = bs.listPhoto(b_num);
 		model.addAttribute("board",board);
+		model.addAttribute("b_profile",user.getUser_profile());
 		model.addAttribute("pageNum",pageNum);
 		model.addAttribute("list",list);
+		model.addAttribute("didHeart",didHeart);
 		
 		Cate cate = cs.select(board.getB_c_num());
 		model.addAttribute("cate",cate);
@@ -318,6 +330,7 @@ public class BoardController {
 
 	  @RequestMapping(value="board/updateLikeCount.html", method=RequestMethod.POST)
 	     public String updateLikeCount(HttpServletResponse response
+	    	   , HttpSession session
 	           , @RequestParam("b_num") String b_num
 	           , @RequestParam("b_like_cnt") String b_like_cnt ) {
 	        System.out.println(b_num);
@@ -329,6 +342,14 @@ public class BoardController {
 	        param.put("b_like_cnt", b_like_cnt);
 	        
 	        bs.updateLikeCount(param);
+	        
+	        int bnum = Integer.parseInt(b_num);
+	        int cnt = Integer.parseInt(b_like_cnt);
+	        Board boardLike = new Board();
+	        boardLike.setB_id((String)session.getAttribute("user_id"));
+	        boardLike.setB_num(bnum);
+	        if(cnt==1) bs.insertBoardLike(boardLike);
+	        else bs.deleteBoardLike(boardLike);
 	        
 	        
 	        return b_like_cnt;

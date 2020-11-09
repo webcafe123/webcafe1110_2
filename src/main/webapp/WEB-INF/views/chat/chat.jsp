@@ -30,7 +30,7 @@
 		$('#message').val("");					//입력한 메시지 삭제
 	}
 	function connect() {
-		websocket=new WebSocket("ws://172.30.1.103:8888/chat-ws.html"); //공통 ip, 다같이 채팅위해
+		websocket=new WebSocket("ws://192.168.219.119:8888/chat-ws.html"); //공통 ip, 다같이 채팅위해
 		websocket.onopen = onOpen;
 		websocket.onmessage = onMessage;
 		websocket.onclose = onClose;

@@ -34,6 +34,9 @@ public class Board {
 	// 검색용
 	private String search;
 	private String keyword;
+	// 전체검색용
+	private boolean totalSearch = false;
+
 }	
 
 

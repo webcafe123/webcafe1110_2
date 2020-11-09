@@ -191,7 +191,7 @@ body {
 <body class="text-center">
 
    <form class="form-signin" action="join.html" method="post" enctype="multipart/frm-data" name="frm" onsubmit="return pwChk()">
-
+	<input type="hidden" name="user_profile" value="basic_profile.png" />
         <!-- 로그인 로고를 넣고 로고에 꿀카페 홈페이지 연동시키기 -->
       <div id="header" >
          <a href="../main.html"><img class="mb-4" src="${path }/resources/images/logo/join_logo2.png"></a>

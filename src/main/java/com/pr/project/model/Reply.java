@@ -29,5 +29,8 @@ public class Reply {
     //게스트북 페이징용
     private int startNum;
     private int endNum;
+    
+    //유저 프로필용
+    private String r_profile;
 
 }

@@ -68,4 +68,16 @@ public class BoardDaoImpl implements BoardDao {
 	public List<Board> listWithPhoto(Board board) {
 		return sst.selectList("boardns.listWithPhoto", board);
 	}
+	@Override
+	public void insertBoardLike(Board boardLike) {
+		sst.insert("boardns.insertBoardLike", boardLike);
+	}
+	@Override
+	public void deleteBoardLike(Board boardLike) {
+		sst.delete("boardns.deleteBoardLike", boardLike);	
+	}
+	@Override
+	public String getBoardLike(Board boardLike) {
+		return sst.selectOne("boardns.getBoardLike", boardLike);
+	}
 }

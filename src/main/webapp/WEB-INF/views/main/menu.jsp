@@ -52,7 +52,7 @@ $(function(){
 	}
 	/* 회원정보수정 버튼 이벤트 */
 	function chatPopup(){
-	   var url = "http://172.30.1.103:8888/chat/chat.html";
+	   var url = "http://192.168.219.119:8888/chat/chat.html";
 	   // var url = "http://172.30.1.103:8888/abc/chat.do";
 	   var newOption = setting(500,580);
 	   window.open(url,"",newOption);
@@ -68,7 +68,12 @@ $(function(){
 		<tr>
 			<td><img id="bmi" src="/resources/images/s1.jpg" alt="" style="cursor:pointer;padding-right:10px;padding-bottom:2px"/></td>
 			<td><p id="cinfo" style="font-size:13px;color:black;padding-top:6px;padding-right:10px;cursor:default;font-weight:bolder">카페정보</p></td>
-			<td><p id="myacti" style="font-size:13px;color:#bfbfbf;padding-top:6px;cursor:pointer;">나의활동</p></td>
+			<c:if test="${not empty sessionScope.user_id}">
+				<td><p id="myacti" style="font-size:13px;color:#bfbfbf;padding-top:6px;cursor:pointer;">나의활동</p></td>
+			</c:if>
+			<c:if test="${empty sessionScope.user_id}">
+				<td><p style="font-size:13px;color:#bfbfbf;padding-top:6px;">나의활동</p></td>
+			</c:if>
 		</tr>
 	</table>
 	</div>
@@ -140,9 +145,16 @@ $(function(){
 		
 		
 	</div>
-	<a href="${path}/user/joinForm.html" class="btn" 
-		style="text-align:center;background-color:#555555;width:200px;height:35px;color:white;border-radius:1px;border:1px solid #c2c2c2;font-size:13px;margin-top:10px;">
-		카페 가입하기</a>
+	<c:if test="${empty sessionScope.user_id}">
+		<a href="${path}/user/joinForm.html" class="btn" 
+			style="text-align:center;background-color:#555555;width:200px;height:35px;color:white;border-radius:1px;border:1px solid #c2c2c2;font-size:13px;margin-top:10px;">
+			카페 가입하기</a>
+	</c:if>
+	<c:if test="${not empty sessionScope.user_id}">
+		<a href="${path}/user/joinForm.html" class="btn" 
+			style="text-align:center;background-color:#555555;width:200px;height:35px;color:white;border-radius:1px;border:1px solid #c2c2c2;font-size:13px;margin-top:10px;">
+			카페 글쓰기</a>
+	</c:if>
 	<%-- <button href="${path}/user/joinForm.html" style="text-align:center;background-color:#555555;width:200px;height:35px;color:white;border-radius:1px;border:1px solid #c2c2c2;font-size:13px;margin-top:10px;">카페 가입하기</button> --%>
 
 	<a href="javascript:chatPopup();" class="btn btn-default" 
@@ -154,11 +166,14 @@ $(function(){
 	<%-- <button  style="text-align:center;background-color:white;width:200px;height:35px;border-radius:1px;border:1px solid #c2c2c2;margin-top:10px;margin-bottom:10px;font-size:13px;">카페 채팅
 		<img src="${path}/resources/images/i7.jpg" alt="" style="margin-bottom:2px"/></button> --%>
 <!-- 검색 기능 -->
-	<form action="searchList.html" method="post" class="form-horizontal">
+	<form action="${path}/board/list.html" method="post" class="form-horizontal">
 		<div class="form-inline form-group" style="padding-left:15px;padding-right:5px">
+			<input type="hidden" name="b_c_num" value="0"/>
 			<input type="hidden" name="pageNum" value="1" />
-			<input type="text" id="search" style="float:left;width:160px;height:25px;border-radius:1px;border:1px solid #c2c2c2;"
-				placeholder="검색어를 입력하세요" name="keyword" value="${board.keyword }"/>
+			<input type="hidden" name="search" value="subcon" />
+			<input type="hidden" name="totalSearch" value="true" />
+			<input type="text" name="keyword" style="float:left;width:160px;height:25px;border-radius:1px;border:1px solid #c2c2c2;"
+				placeholder="검색어를 입력하세요" name="keyword" value="${board.keyword }" required="required"/>
 			<input type="submit" value="검색" style="float:right;width:40px;height:25px;color:white;background-color:#24c932;border-radius:1px;border:1px solid #24c932;font-size:12px;margin-bottom:4px;"/>
 		</div>
 	</form>

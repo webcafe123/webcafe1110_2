@@ -46,10 +46,10 @@
 							<img src="${path }/resources/images/i8.jpg" alt="" style="float:left;cursor:pointer" onclick=""/>
 							<img src="${path }/resources/images/i9.jpg" alt="" style="float:left;cursor:pointer" onclick=""/>
 							<c:if test="${not empty sessionScope.user_id}">
-								<input style="float:right;border-radius:6px;border:none;outline:none;margin-right:50px;font-size:13px;background-color:transparent;color:#a3a3a3;font-weight:bold" type="submit" value="등록"></input>
+								<input style="float:right;border-radius:6px;border:none;outline:none;margin-right:20px;font-size:13px;background-color:transparent;color:#a3a3a3;font-weight:bold" type="submit" value="등록"></input>
 							</c:if>
 							<c:if test="${empty sessionScope.user_id}">
-								<input style="float:right;border-radius:6px;border:none;outline:none;margin-right:50px;font-size:13px;background-color:transparent;color:#a3a3a3;font-weight:bold" type="button" value="등록"></input>
+								<input style="float:right;border-radius:6px;border:none;outline:none;margin-right:20px;font-size:13px;background-color:transparent;color:#a3a3a3;font-weight:bold" type="button" value="등록"></input>
 							</c:if>
 						
 						</p>

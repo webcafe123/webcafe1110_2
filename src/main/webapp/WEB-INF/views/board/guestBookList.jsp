@@ -23,7 +23,8 @@
 		<c:if test="${rl.r_del!='y'}">
 			<tr>
 				<td id="gbListTd_${rl.r_num}" style="width:840px;min-height:160px;padding-left:10px;">
-				<img src="/resources/images/i13.jpg" alt="" style="float:left;"/> 
+				<!-- <img src="/resources/images/i13.jpg" alt="" style="float:left;"/>  -->
+				<img width="35" height="35" alt="프로필 사진" style="float:left;margin-top:5px;margin-left:5px;border-radius:50%;box-shadow:0px 0px 0.5px 1px #dfe1e5;" src="${path }/resources/upload/${rl.r_profile}">
 				<span style="float:right;font-size:10px;color:#8a8a8a;letter-spacing:1px;" >
 					<img src="/resources/images/i11.jpg" alt="" />
 					
@@ -38,7 +39,7 @@
 					<br />
 					<span style="float:left;font-size:11px;color:#8f8f8f;font-weight:normal;line-height:10px;">${rl.r_update }</span>	
 				</p>
-				<textarea style="display:block;float:left;white-space: pre-wrap;font-size:14px;text-align:left;margin-top:10px;margin-left:10px;border:none;outline:none;resize:none;" rows="3" cols="110" readonly="readonly">${rl.r_content }</textarea> 
+				<textarea style="display:block;float:left;white-space: pre-wrap;font-size:14px;text-align:left;margin-top:10px;margin-left:10px;border:none;outline:none;resize:none;" rows="3" cols="105" readonly="readonly">${rl.r_content }</textarea> 
 					<p style="padding-left:10px;font-size:13px;">
 						<a id="clickGbRepl_${rl.r_num}" style="float:left;color:#fc2323;text-decoration:underline;cursor:pointer;" onclick="getGbRepl(${rl.gbReply},${rl.r_num})">댓글 ${rl.gbReply}</a>
 						

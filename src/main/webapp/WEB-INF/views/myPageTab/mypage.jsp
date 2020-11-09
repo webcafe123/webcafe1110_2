@@ -90,7 +90,7 @@ function myMsgsPopup(){
 <tr style="color:#7d7d7d"> 
 	<td style="padding-bottom:7px"> 
 
-	<!-- 프로필 바꾸는 곳 -->
+<%-- 	<!-- 프로필 바꾸는 곳 -->
 	<c:if test="${profile == null }">	
 		<img id="profile" name="profile" width=64 height=64 alt="" src="${path }/resources/images/basic_profile.png">
 	</c:if>
@@ -102,7 +102,8 @@ function myMsgsPopup(){
 	</c:if>
 	<c:if test="${profile == 'profile3' }">	
 		<img id="profile" name="profile" width=64 height=64 alt="" src="${path }/resources/images/profile3.png">
-	</c:if>
+	</c:if> --%>
+	<img id="profile" name="profile" width=64 height=64 alt="" style="padding:5px;border-radius:50%;" src="${path }/resources/upload/${user_profile}">
 	 </td>
 	<td style="padding-left:5px;padding-bottom:7px">
 		<p style="font-size:13px;color:black;font-weight:bolder; padding-top:5px">  ${user_nickname } </p> 

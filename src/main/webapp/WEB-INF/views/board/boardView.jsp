@@ -103,8 +103,9 @@
                <div class="WriterInfo" style="margin:15px; float:left;">
                   <div style="width: 500px;">
                      <a href=""> 
-                         <img src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77"
-                        alt="프로필 사진" width="40" height="40" style="float: left;">
+                         <!-- <img src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77"
+                        alt="프로필 사진" width="40" height="40" style="float: left;"> -->
+                      <img width="50" height="50" alt="프로필 사진" style="float:left;border-radius:50%;box-shadow:0px 0px 0.5px 1.5px #dfe1e5;" src="${path }/resources/upload/${b_profile}">
                      </a>
                      <div class="nick_box" style="margin:10px; padding-left: 45px;">
                         <a id="writerInfocallingio" href="#" role="button" style="font-weight: bold; color: black;">
@@ -153,9 +154,10 @@
             <td>
                <div style="margin-top: 50px;margin-bottom: 10px; ">
                   <a href=""  style="color:black;"> <!-- <span class="thumb"> -->
-                     <img src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77"
-                        alt="프로필 사진" width="36" height="36" style="margin-bottom:13px;"> <!-- </span> -->
-                           <strong class="user">${board.b_nick }</strong>님의 게시글 더보기
+                  <!--    <img src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77"
+                        alt="프로필 사진" width="36" height="36" style="margin-bottom:13px;"> --> <!-- </span> -->
+                        <img width="35" height="35" alt="프로필 사진" style="float:left;margin-right:5px;margin-bottom:13px;border-radius:50%;box-shadow:0px 0px 0.5px 1px #dfe1e5;" src="${path }/resources/upload/${b_profile}">
+						<strong class="user">${board.b_nick }</strong>님의 게시글 더보기
                         
                      
                   </a>
@@ -165,10 +167,15 @@
          <tr>
             <td>
                <div>
-               <i id='heartIcon' class="far fa-heart" onclick="addHeart(this);" style="cursor: pointer; color: red;margin-top:5px;float:left;"  value="0" ></i>&nbsp;좋아요
-
-               <button type="button" onclick="location.href='replyView.jsp'" style="font-size:13px; border:none; background-color:white;">
-                  <img width=20 height=20 src="${path }/resources/images/b1.png" alt="">&nbsp;댓글&nbsp;${board.b_reply_cnt }</button>
+               <c:if test="${didHeart==0 }">
+               		<i id='heartIcon' class="far fa-heart" onclick="addHeart(this);" style="cursor: pointer; color: red;margin-top:5px;float:left;" value="0"></i>&nbsp;좋아요
+			   </c:if>
+			   <c:if test="${didHeart==1 }">
+               		<i id='heartIcon' class="fas fa-heart" onclick="addHeart(this);" style="cursor: pointer; color: red;margin-top:5px;float:left;" value="1"></i>&nbsp;좋아요
+			   </c:if>
+               <button style="font-size:13px; border:none; outline:none; background-color:white;">
+                  <img width=20 height=20 src="${path }/resources/images/b1.png" alt="">&nbsp;댓글&nbsp;${board.b_reply_cnt }
+               </button>
                </div>   
             </td>
          </tr>

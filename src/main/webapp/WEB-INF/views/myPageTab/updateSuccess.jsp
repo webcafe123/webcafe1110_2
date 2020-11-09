@@ -23,6 +23,8 @@ alert("정보 수정 완료~!" );
 opener.parent.location.reload();
 window.close();
 
+
+
 </script>
 </c:if>
 

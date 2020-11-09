@@ -86,6 +86,7 @@ public class UserController {
 	@RequestMapping("user/login")
 	   public String login(User user, LoginIp loginip, Model model, HttpServletRequest request, HttpSession session) {
 	      int result = 0;
+	      
 	      User ur = us.select(user.getUser_id());
 
 	      if (ur == null || ur.getUser_del().equals("y"))
@@ -101,8 +102,9 @@ public class UserController {
 
 			//유정 추가
 			session.setAttribute("user", ur);
-			System.out.println(ur);
-			System.out.println(ur.getUser_nickname()); // 닉네임 가져옴
+//			System.out.println(ur);
+//			System.out.println(ur.getUser_nickname()); // 닉네임 가져옴
+			session.setAttribute("user_profile", ur.getUser_profile());
 			session.setAttribute("user_nickname", ur.getUser_nickname());
 			session.setAttribute("user_regdate", ur.getUser_regdate());
 			

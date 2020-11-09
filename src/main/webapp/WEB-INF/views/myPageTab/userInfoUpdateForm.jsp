@@ -37,7 +37,7 @@ function checking(){
 <span style="padding-bottom:7px"> &nbsp;</span>
 <div class="container" >
 	<div >
-	<form name="updateSuccess" action="updateSuccess.html"  method="post">
+	<form name="updateSuccess" action="updateSuccess.html"  method="post" enctype="multipart/form-data">
 		<table style="background-color:#EAEAEA;" align="center">
 		<tr style="padding-left:10px"> 
 			<td style="padding-left:30px;padding-right:30px;padding-top:10px;font-size:13px;font-weight:bolder"> 별명 </td>
@@ -76,31 +76,51 @@ function checking(){
 		<tr>
 			<td style="padding-left:30px;padding-top:10px;font-size:12px;font-weight:bolder"> 프로필<br />이미지 </td>
 			<td style="padding-top:15px;"> 
+			<c:if test="${empty user_profile}">
 				<div class="form-check form-check-inline" align="center">
   				<label class="form-check-label" for="inlineRadio1">
-  				<img id="" width=100 height=100 src="${path }/resources/images/profile1.png"> 
+  				<img id="" width=80 height=80 style="border-radius:50%" src="${path }/resources/images/basic_profile.png"> 
   				</label>
   				<br>
-  				<input class="form-check-input" type="radio" name="inlineRadioOptions" id="profile1" value="profile1" checked>
+  				<input class="form-check-input" type="radio" name="inlineRadioOptions" id="basic_profile" value="basic_profile.png" checked>
+				</div>
+			</c:if>
+			<c:if test="${not empty user_profile}">
+			<div class="form-check form-check-inline" align="center">
+  				<label class="form-check-label" for="inlineRadio1">
+  				<img id="" width=80 height=80 style="border-radius:50%" src="${path }/resources/upload/${user_profile}"> 
+  				</label>
+  				<br>
+  				<input class="form-check-input" type="radio" name="inlineRadioOptions" id="uploaded_profile" value="${user_profile}" checked>
+				</div>
+			</c:if>	
+			</td>
+			<td style="padding-top:15px;"> 
+				<div class="form-check form-check-inline" align="center">
+  				<label class="form-check-label" for="inlineRadio1">
+  				<img id="" width=80 height=80 src="${path }/resources/images/profile1.png"> 
+  				</label>
+  				<br>
+  				<input class="form-check-input" type="radio" name="inlineRadioOptions" id="profile1" value="profile1.png" >
 				</div>
 			</td>
 			<td style="padding-top:15px;"> 
 				<div class="form-check form-check-inline" align="center">
   				<label class="form-check-label" for="inlineRadio1">
-  				<img id="" width=100 height=100 src="${path }/resources/images/profile2.png"> 
+  				<img id="" width=80 height=80 src="${path }/resources/images/profile2.png"> 
   				
   				</label>
   				<br>
-  				<input class="form-check-input" type="radio" name="inlineRadioOptions" id="profile2" value="profile2" >
+  				<input class="form-check-input" type="radio" name="inlineRadioOptions" id="profile2" value="profile2.png" >
 				</div>
 			</td>
 			<td style="padding-top:15px;"> 
 				<div class="form-check form-check-inline" align="center">
   				<label class="form-check-label" for="inlineRadio1">
-  				<img id="" width=100 height=100 src="${path }/resources/images/profile3.png"> 
+  				<img id="" width=80 height=80 src="${path }/resources/images/profile3.png"> 
   				</label>
   				<br>
-  				<input class="form-check-input" type="radio" name="inlineRadioOptions" id="profile3" value="profile3" >
+  				<input class="form-check-input" type="radio" name="inlineRadioOptions" id="profile3" value="profile3.png" >
 				</div>
 			</td>
 			
@@ -113,7 +133,7 @@ function checking(){
 			<br>
 				 * 이미지 선택해주세요. 
 				 <a id="" href="#" role="button"><img src="https://ssl.pstatic.net/static/cafe/myinfo/btn_profile_img_change.png" alt="이미지변경"></a>
-				 
+				 <input type="file" name="userProfile" value="이미지선택">
 			</td>
 		</tr>
 		

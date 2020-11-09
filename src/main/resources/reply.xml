@@ -43,7 +43,12 @@
 </update>
 
 <select id="list" parameterType="integer" resultType="reply">
-	select * from reply where r_b_num=#{r_b_num} order by r_step
+	select a.*, b.user_profile as r_profile 
+	from user_info b 
+		inner join 
+		(select * from reply where r_b_num=#{r_b_num} order by r_step) a
+		on b.user_id=a.r_id
+		order by a.r_step
 </select>
 
 <select id="count" parameterType="integer" resultType="integer">
@@ -51,17 +56,26 @@
 </select>
 
 <select id="list2" parameterType="reply" resultType="reply">
-	select * from 
-		(select a.*, rownum rn from
-			(select r.*, o.gbReply from reply r inner join 
-				(select r_origin, count(*)-1 as gbReply from reply where r_b_num=#{r_b_num} group by r_origin) o
- 			on r.r_num=o.r_origin order by r_num desc) 
- 		a) 
-	where rn between #{startNum} and #{endNum}
+	select c.*, d.user_profile as r_profile 
+	from user_info d 
+		inner join 
+		(select * from 
+			(select a.*, rownum rn from
+				(select r.*, o.gbReply from reply r inner join 
+					(select r_origin, count(*)-1 as gbReply from reply where r_b_num=#{r_b_num} group by r_origin) o
+	 			on r.r_num=o.r_origin order by r_num desc) 
+	 		a) 
+		where rn between #{startNum} and #{endNum}) c
+	on d.user_id=c.r_id
 </select>
 
 <select id="list3" parameterType="integer" resultType="reply">
-	select * from reply where r_origin=#{r_num} and r_level!=0 order by r_step
+	select a.*, b.user_profile as r_profile 
+	from user_info b 
+		inner join 
+	(select * from reply where r_origin=#{r_num} and r_level!=0 order by r_step) a
+	on b.user_id=a.r_id
+	order by a.r_step
 </select>
 
 <select id="getReply" parameterType="integer" resultType="reply">

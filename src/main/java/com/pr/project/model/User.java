@@ -19,4 +19,5 @@ public class User {
 	private Date user_regdate;
 	private Date user_update;
 	private String user_pwd;
+	private String user_profile;
 }

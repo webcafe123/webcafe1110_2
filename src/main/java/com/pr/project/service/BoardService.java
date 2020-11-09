@@ -20,4 +20,7 @@ public interface BoardService {
 	List<FileUpload> photoFromList(int b_num);
 	void updateLikeCount(HashMap<String, Object> param);
 	List<Board> listWithPhoto(Board board);
+	void insertBoardLike(Board boardLike);
+	void deleteBoardLike(Board boardLike);
+	String getBoardLike(Board boardLike);
 }

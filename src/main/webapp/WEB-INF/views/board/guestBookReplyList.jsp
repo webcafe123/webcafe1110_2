@@ -25,9 +25,10 @@
 				<tr id="gbRerepl_${gbrl.r_num}" style="border-top:1px solid #d9d9d9;">
 					<c:if test="${gbrl.r_level-1>0 }"><td colspan="${gbrl.r_level-1}"></td></c:if>
 					<td style="width:50px;padding:0px;">
-						<img src="/resources/images/i13.jpg" alt="" style="float:left;margin-top:10px;margin-bottom:10px;width:50px;"/>
+						<!-- <img src="/resources/images/i13.jpg" alt="" style="float:left;margin-top:10px;margin-bottom:10px;width:50px;"/> -->
+						<img width="35" height="35" alt="프로필 사진" style="float:left;margin-top:10px;margin-left:10px;border-radius:50%;box-shadow:0px 0px 0.5px 1px #dfe1e5;" src="${path }/resources/upload/${gbrl.r_profile}">
 					</td>
-					<td colspan="9-${gbrl.r_level-1}" style="padding-top:2px;">
+					<td colspan="9-${gbrl.r_level-1}" style="padding-top:15px;">
 						<p style="float:left;padding-left:7px;font-size:13px;font-weight:bolder;line-height:10%;">${gbrl.r_nick }</p>
 						<p style="float:left;padding-top:1px;padding-left:7px;font-size:10px;color:#8f8f8f;font-weight:normal;line-height:10%;">${gbrl.r_update }</p>
 						<c:if test="${gbrl.r_level-1<8}">

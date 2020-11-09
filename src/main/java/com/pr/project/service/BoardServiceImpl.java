@@ -64,5 +64,17 @@ public class BoardServiceImpl implements BoardService {
 	public List<Board> listWithPhoto(Board board) {
 		return bd.listWithPhoto(board);
 	}
+	@Override
+	public void insertBoardLike(Board boardLike) {
+		bd.insertBoardLike(boardLike);
+	}
+	@Override
+	public void deleteBoardLike(Board boardLike) {
+		bd.deleteBoardLike(boardLike);
+	}
+	@Override
+	public String getBoardLike(Board boardLike) {
+		return bd.getBoardLike(boardLike);
+	}
 	
 }

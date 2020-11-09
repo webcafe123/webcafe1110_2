@@ -16,11 +16,11 @@
    <h5 class="text-primary" style="color: black;">카테고리</h5>
    <table class="table" style="border-top: 2px solid black;">   
 
-      <c:if test="${empty list }">
+<%--       <c:if test="${empty list }">
          <tr>
             <td>데이터가 없습니다</td>
          </tr>
-      </c:if>
+      </c:if> --%>
 
       <tr>
          <td style="font-weight:bold; font-size: 14px;">♬&nbsp;영꿀친목 꿀단지</td>

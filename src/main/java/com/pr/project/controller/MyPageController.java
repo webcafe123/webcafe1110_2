@@ -1,5 +1,7 @@
 package com.pr.project.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -9,11 +11,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.pr.project.model.Message;
 import com.pr.project.model.User;
@@ -134,24 +136,36 @@ public class MyPageController {
 	}
 	
 	@RequestMapping("myPageTab/updateSuccess")
-	public String updateSuccess(User user, Model model, @RequestParam("inlineRadioOptions") String profile, HttpServletRequest req, HttpSession session) throws IOException{
+	public String updateSuccess(User user, Model model, @RequestParam("inlineRadioOptions") String profile, HttpServletRequest req, HttpSession session, MultipartHttpServletRequest mhsr) throws IOException {
 		String user_id = (String)session.getAttribute("user_id");
 		user.setUser_id(user_id);
-		
+
+	    String real = session.getServletContext().getRealPath("/resources/upload");
+        MultipartFile up = mhsr.getFile("userProfile");
+        String filename = up.getOriginalFilename();
+         
+        if (filename != null && !filename.equals("")) {
+            FileOutputStream fos = new FileOutputStream(new File(real+"/"+filename));
+            fos.write(up.getBytes());
+            fos.close();
+            user.setUser_profile(filename);
+		} else user.setUser_profile(profile);
+
 		int result = us.updateN(user);
 		
 		model.addAttribute("result", result);
 		model.addAttribute("user", user);
-		model.addAttribute("profile", profile);
+		//model.addAttribute("profile", profile);
 		
 		//req.setAttribute("profile", profile);
-		session.setAttribute("profile", profile);
+		//session.setAttribute("profile", profile);
 	
 		
-		System.out.print(profile);
-		System.out.println(user.getUser_nickname() ); // 바꾼걸로 나옴
+		//System.out.print(profile);
+		//System.out.println(user.getUser_nickname() ); // 바꾼걸로 나옴
 		
 		session.setAttribute("user_nickname", user.getUser_nickname());
+		session.setAttribute("user_profile", user.getUser_profile());
 		
 		return "myPageTab/updateSuccess";
 	}
