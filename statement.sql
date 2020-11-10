@@ -1,3 +1,4 @@
+
 --user_정보
 create table user_info (
   user_id               varchar2(100) primary key, --pk
